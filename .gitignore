@@ -8,9 +8,11 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
-# Data: keep the folders, not the raw files
+# Data: keep the folders, not the data files
 data/raw/*
 !data/raw/README.md
+data/processed/*
+!data/processed/README.md
 
 # OS / editors
 .DS_Store
