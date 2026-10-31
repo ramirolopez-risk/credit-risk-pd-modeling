@@ -42,7 +42,7 @@ In my thesis, all models were trained on a SMOTE-balanced dataset and every cali
 |---|---|---|
 | SMOTE and calibration experiment | `smote_calibration_experiment.ipynb` | ✅ |
 | Exploratory data analysis | `01_EDA.ipynb` | ✅ |
-| Data preparation & feature engineering | `02_Data_Preparation.ipynb` | ⬜ |
+| Data preparation & feature engineering | `02_Data_Preparation.ipynb` | ✅ |
 | Logistic regression baseline | `03_Logistic_Regression.ipynb` | ⬜ |
 | Model comparison (Random Forest, Gradient Boosting) | `04_Model_Comparison.ipynb` | ⬜ |
 | Calibration & interpretability (Brier score, SHAP) | `05_Calibration_Interpretability.ipynb` | ⬜ |
