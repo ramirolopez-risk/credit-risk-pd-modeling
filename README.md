@@ -45,6 +45,24 @@ A simple, interpretable logistic regression with well-treated data outperforms t
 
 👉 [`notebooks/03_Logistic_Regression.ipynb`](notebooks/03_Logistic_Regression.ipynb)
 
+## Model comparison: XGBoost vs. logistic regression
+
+Compared with 5-fold stratified cross-validation on the training set, then evaluated once on the test set.
+
+| Model | CV AUC (mean ± std) | Test AUC | Brier score | Average PD |
+|---|---|---|---|---|
+| Logistic regression | 0.852 ± 0.007 | 0.859 | 0.0507 | 6.7% |
+| **XGBoost** | **0.865 ± 0.006** | **0.870** | **0.0487** | **6.7%** |
+| XGBoost – original thesis (with SMOTE) | – | 0.832 | 0.0657 | – |
+
+- XGBoost outperforms on both discrimination and calibration, and the gap is stable across folds.
+- With the new preprocessing and no SMOTE, the same algorithm improves from 0.832 to 0.870 AUC and cuts the Brier score by 26%.
+- XGBoost corrects the S-shaped miscalibration of the logistic regression in the 10–45% PD range.
+
+![Calibration comparison](reports/figures/calibration_comparison.png)
+
+👉 [`notebooks/04_Model_Comparison.ipynb`](notebooks/04_Model_Comparison.ipynb)
+
 ## Questions this project answers
 
 1. How much predictive power do ML models add over logistic regression?
@@ -60,7 +78,7 @@ A simple, interpretable logistic regression with well-treated data outperforms t
 | Exploratory data analysis | `01_EDA.ipynb` | ✅ |
 | Data preparation & feature engineering | `02_Data_Preparation.ipynb` | ✅ |
 | Logistic regression baseline | `03_Logistic_Regression.ipynb` | ✅ |
-| Model comparison (Random Forest, Gradient Boosting) | `04_Model_Comparison.ipynb` | ⬜ |
+| Model comparison (Random Forest, Gradient Boosting) | `04_Model_Comparison.ipynb` | ✅ |
 | Calibration & interpretability (Brier score, SHAP) | `05_Calibration_Interpretability.ipynb` | ⬜ |
 | Portfolio stress testing | `06_Stress_Testing.ipynb` | ⬜ |
 
@@ -84,6 +102,7 @@ credit-risk-pd-modeling/
 │   ├── 01_EDA.ipynb
 │   ├── 02_Data_Preparation.ipynb
 │   └── 03_Logistic_Regression.ipynb
+│   └── 04_Model_Comparison.ipynb
 ├── src/                      # reusable functions
 ├── reports/
 │   └── figures/              # charts used in this README
@@ -93,10 +112,9 @@ credit-risk-pd-modeling/
 
 ## Next steps
 
-1. XGBoost and Random Forest on the new preprocessing, compared with stratified cross-validation.
-2. Post-hoc calibration (Platt / isotonic) and SHAP interpretability.
-3. Review the negative `DebtRatio` coefficient (residual extreme values from near-zero incomes).
-4. Portfolio stress testing of aggregate PD.
+1. Post-hoc calibration (Platt / isotonic) and SHAP interpretability.
+2. Review the negative `DebtRatio` coefficient (residual extreme values from near-zero incomes).
+3. Portfolio stress testing of aggregate PD.
 
 ## Author
 
