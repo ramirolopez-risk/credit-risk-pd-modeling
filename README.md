@@ -63,6 +63,22 @@ Compared with 5-fold stratified cross-validation on the training set, then evalu
 
 👉 [`notebooks/04_Model_Comparison.ipynb`](notebooks/04_Model_Comparison.ipynb)
 
+## Calibration, interpretability and final model
+
+**Post-hoc calibration is not needed.** Without SMOTE, XGBoost is already well calibrated: Platt scaling worsens the Brier score (0.0487 → 0.0504) and isotonic regression leaves it unchanged. With quantile bins (~3,000 borrowers each), the calibration curve lies on the diagonal, including the riskiest decile (estimated PD ~37%, observed ~37.5%).
+
+![Quantile calibration curve](reports/figures/calibration_quantile.png)
+
+**Both models agree on the drivers of risk.** The top 5 drivers are identical in XGBoost (SHAP) and the logistic regression: revolving utilization, the three past-due variables and age. XGBoost also recovers the economically correct sign of `DebtRatio`, which the linear model could not.
+
+![SHAP importance](reports/figures/shap_importance.png)
+
+**Final model: XGBoost with monotonic constraints.** Feature engineering added nothing (trees already build those combinations). Monotonic constraints cost almost nothing once utilization is left free, as the EDA showed it is not monotonic at the low end. The final model matches the baseline on the test set (AUC 0.870, Brier 0.0487) while guaranteeing economically coherent behavior.
+
+![Model improvements](reports/figures/model_improvements_cv.png)
+
+👉 [`notebooks/05_Calibration_Interpretability.ipynb`](notebooks/05_Calibration_Interpretability.ipynb) · [`notebooks/05b_Model_Improvements.ipynb`](notebooks/05b_Model_Improvements.ipynb)
+
 ## Questions this project answers
 
 1. How much predictive power do ML models add over logistic regression?
@@ -80,6 +96,7 @@ Compared with 5-fold stratified cross-validation on the training set, then evalu
 | Logistic regression baseline | `03_Logistic_Regression.ipynb` | ✅ |
 | Model comparison (Random Forest, Gradient Boosting) | `04_Model_Comparison.ipynb` | ✅ |
 | Calibration & interpretability (Brier score, SHAP) | `05_Calibration_Interpretability.ipynb` | ✅ |
+| Model improvements (feature engineering, monotonic constraints) | `05b_Model_Improvements.ipynb` | ✅ |
 | Portfolio stress testing | `06_Stress_Testing.ipynb` | ⬜ |
 
 **Evaluation:** ROC-AUC, Gini, KS, precision/recall, calibration curves and Brier score, always compared against a naive benchmark.
@@ -103,6 +120,8 @@ credit-risk-pd-modeling/
 │   ├── 02_Data_Preparation.ipynb
 │   └── 03_Logistic_Regression.ipynb
 │   └── 04_Model_Comparison.ipynb
+│   ├── 05_Calibration_Interpretability.ipynb
+│   └── 05b_Model_Improvements.ipynb
 ├── src/                      # reusable functions
 ├── reports/
 │   └── figures/              # charts used in this README
