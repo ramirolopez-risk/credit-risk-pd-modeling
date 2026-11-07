@@ -131,9 +131,10 @@ credit-risk-pd-modeling/
 
 ## Next steps
 
-1. Post-hoc calibration (Platt / isotonic) and SHAP interpretability.
-2. Review the negative `DebtRatio` coefficient (residual extreme values from near-zero incomes).
-3. Portfolio stress testing of aggregate PD.
+## Next steps
+
+1. Portfolio stress testing of aggregate PD under adverse scenarios.
+2. Move reusable code (`evaluar`, feature engineering) to `src/`.
 
 ## Author
 
