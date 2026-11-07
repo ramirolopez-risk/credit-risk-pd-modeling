@@ -79,7 +79,7 @@ Compared with 5-fold stratified cross-validation on the training set, then evalu
 | Data preparation & feature engineering | `02_Data_Preparation.ipynb` | ✅ |
 | Logistic regression baseline | `03_Logistic_Regression.ipynb` | ✅ |
 | Model comparison (Random Forest, Gradient Boosting) | `04_Model_Comparison.ipynb` | ✅ |
-| Calibration & interpretability (Brier score, SHAP) | `05_Calibration_Interpretability.ipynb` | ⬜ |
+| Calibration & interpretability (Brier score, SHAP) | `05_Calibration_Interpretability.ipynb` | ✅ |
 | Portfolio stress testing | `06_Stress_Testing.ipynb` | ⬜ |
 
 **Evaluation:** ROC-AUC, Gini, KS, precision/recall, calibration curves and Brier score, always compared against a naive benchmark.
